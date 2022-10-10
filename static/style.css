@@ -1,3 +1,7 @@
-body {
-    margin: 0;
+img {
+    /* M5Stackで撮影した写真は1600×1200 */
+    width: 980px;
+    height: 660px;
+
+    object-fit: cover;
 }
