@@ -35,9 +35,9 @@ def Web():
 
 @app.route("/twitter", methods=["GET"])
 def Twitter():
-    with open("menu.jpg", "rb") as file:
-        imgBase64 = base64.b64encode(file.read()).decode("utf-8")
-    return {"image": imgBase64}
+    with open("static/menu.jpg", "rb") as file:
+        imageBase64 = base64.b64encode(file.read()).decode("utf-8")
+    return {"image": imageBase64}
 
 
 if __name__ == "__main__":
