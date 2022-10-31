@@ -1,3 +1,4 @@
+import base64
 import os
 
 from flask import Flask, render_template, request, url_for
@@ -12,12 +13,12 @@ def override_url_for():
 
 
 def dated_url_for(endpoint, **values):
-    if endpoint == 'static':
-        filename = values.get('filename', None)
+    if endpoint == "static":
+        filename = values.get("filename", None)
         if filename:
             file_path = os.path.join(app.root_path,
                                      endpoint, filename)
-            values['q'] = int(os.stat(file_path).st_mtime)
+            values["q"] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
 
 
@@ -30,6 +31,13 @@ def Web():
         imagePath = "./static/menu.jpg"
         fs.save(imagePath)
         return "ok"
+
+
+@app.route("/twitter", methods=["GET"])
+def Web():
+    with open("menu.jpg", "rb") as file:
+        imgBase64 = base64.b64encode(file.read()).decode("utf-8")
+    return {"image": imgBase64}
 
 
 if __name__ == "__main__":
