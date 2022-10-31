@@ -2,9 +2,14 @@ import base64
 import os
 
 from flask import Flask, render_template, request, url_for
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
+CORS(
+    app,
+    supports_credentials=True
+)
 
 
 @app.context_processor
