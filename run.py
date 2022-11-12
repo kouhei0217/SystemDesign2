@@ -1,7 +1,7 @@
 import base64
 import os
 
-from flask import Flask, render_template, request, url_for
+from flask import Flask, Response, render_template, request, url_for
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -27,22 +27,40 @@ def dated_url_for(endpoint, **values):
     return url_for(endpoint, **values)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def Web():
-    if request.method == "GET":
-        return render_template("index.html")
-    elif request.method == "POST":
-        fs = request.files["image"]
-        imagePath = "./static/menu.jpg"
-        fs.save(imagePath)
-        return "ok"
+    return render_template("index.html")
 
 
-@app.route("/twitter", methods=["GET"])
-def Twitter():
+@app.route("/fetch-image", methods=["GET"])
+def FetchImage():
     with open("static/menu.jpg", "rb") as file:
         imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}
+
+
+@app.route("/save-image", methods=["POST"])
+def SaveImage():
+    fs = request.files["image"]
+    imagePath = "./static/menu.jpg"
+    fs.save(imagePath)
+    return Response(status=204)
+
+
+@app.route("/fetch-menu", methods=["GET"])
+def FetchMenu():
+    return {"name": "s1"}
+
+
+@app.route("/fetch-menus", methods=["GET"])
+def FetchMenus():
+    return {"names": ["s1", "s2"]}
+
+
+@app.route("/vote-menu", methods=["POST"])
+def VoteMenu():
+    voteNumber = request.data["number"]
+    return Response(status=204)
 
 
 if __name__ == "__main__":
