@@ -8,7 +8,7 @@ connection = pymysql.connect(host="localhost",
 
 try:
     with connection.cursor() as cursor:
-        sql = "INSERT INTO votes (month) VALUES (MONTH(CURRENT_TIMESTAMP), %d)"
+        sql = "INSERT INTO `votes` (`month`) VALUES (MONTH(CURRENT_TIMESTAMP), %d)"
         cursor.execute(sql, (1))
 
     connection.commit()
