@@ -4,7 +4,8 @@ import os
 from flask import Flask, Response, render_template, request, url_for
 from flask_cors import CORS
 
-from python.handleDatabase import fetchMenus, voteMenu
+from python.HandleDatabase import (AddMenu, FetchImage, FetchMenu, FetchMenus,
+                                   SaveImage, VoteMenu)
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
@@ -30,39 +31,45 @@ def dated_url_for(endpoint, **values):
 
 
 @app.route("/", methods=["GET"])
-def Web():
+def WebAPI():
     return render_template("index.html")
 
 
 @app.route("/fetch-image", methods=["GET"])
-def FetchImage():
-    with open("static/menu.jpg", "rb") as file:
+def FetchImageAPI():
+    with open("static/" + FetchImage()["image_id"] + ".jpg", "rb") as file:
         imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}
 
 
 @app.route("/save-image", methods=["POST"])
-def SaveImage():
+def SaveImageAPI():
     fs = request.files["image"]
     imagePath = "./static/menu.jpg"
     fs.save(imagePath)
+    SaveImage()
     return Response(status=204)
 
 
 @app.route("/fetch-menu", methods=["GET"])
-def FetchMenu():
-    return {"name": "s1"}
+def FetchMenuAPI():
+    return {"menu_name": FetchMenu()}
 
 
 @app.route("/fetch-menus", methods=["GET"])
-def FetchMenus():
-    print(type(fetchMenus()))
-    return {"menus": fetchMenus()}
+def FetchMenusAPI():
+    return {"menus": FetchMenus()}
 
 
 @app.route("/vote-menu", methods=["POST"])
-def VoteMenu():
-    voteMenu(request.data["id"])
+def VoteMenuAPI():
+    VoteMenu(request.data["menu_id"])
+    return Response(status=204)
+
+
+@app.route("/vote-menu", methods=["POST"])
+def AddMenuAPI():
+    AddMenu(request.data["menu_name"])
     return Response(status=204)
 
 
