@@ -56,7 +56,7 @@ def FetchMenu():
 
 @app.route("/fetch-menus", methods=["GET"])
 def FetchMenus():
-    print(fetchMenus())
+    print(type(fetchMenus()))
     return fetchMenus()
 
 
