@@ -1,0 +1,33 @@
+1,2,3,4,5
+Table,images,,,
+Field,image_id,image_path,,
+Type,INT UNSIGNED,VARCHAR(20),,
+Null,NO,NO,,
+Key,PRIMARY,,,
+Default,NULL,NULL,,
+Extra,AUTO_INCREMENT,,,
+Note,画像ID,画像ファイルのパス,,
+Sample,1,static/1.jpg,,
+,2,static/2.jpg,,
+,,,,
+Table,menus,,,
+Field,menu_id,menu_name,,
+Type,INT UNSIGNED,VARCHAR(20),,
+Null,NO,NO,,
+Key,PRIMARY,UNIQUE,,
+Default,NULL,NULL,,
+Extra,AUTO_INCREMENT,,,
+Note,メニューID,メニュー名,,
+Sample,1,a定食,,
+,2,b定食,,
+,,,,
+Table,votes,,,
+Field,year,month,menu_id,default_flag
+Type,YEAR,TINY INT,INT UNSIGNED,BOOLEAN
+Null,NO,NO,NO,NO
+Key,,,,
+Default,NULL,NULL,NULL,NULL
+Extra,,,,
+Note,年,月,メニューID,初期値フラグ
+Sample,2000,1,1,1
+,2000,1,1,0
