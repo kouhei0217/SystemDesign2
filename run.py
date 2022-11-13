@@ -1,5 +1,4 @@
 import base64
-import json
 import os
 
 from flask import Flask, Response, render_template, request, url_for
@@ -57,7 +56,7 @@ def FetchMenu():
 
 @app.route("/fetch-menus", methods=["GET"])
 def FetchMenus():
-    return json.dumps(fetchMenus())
+    return dict(fetchMenus())
 
 
 @app.route("/vote-menu", methods=["POST"])
