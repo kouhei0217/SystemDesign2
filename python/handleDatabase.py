@@ -12,17 +12,22 @@ connection = pymysql.connect(host="localhost",
                              charset="utf8mb4",
                              cursorclass=pymysql.cursors.DictCursor)
 
-try:
-    with connection.cursor() as cursor:
-        sql = "INSERT INTO votes (year, month, menu_id) VALUES (YEAR(CURRENT_TIMESTAMP), MONTH(CURRENT_TIMESTAMP), %s);"
-        cursor.execute(sql, (3))
 
-    connection.commit()
+def fetchMenus():
+    try:
+        with connection.cursor() as cursor:
+            sql = "SELECT menus.menu_id, menus.menu_name FROM menus NATURAL JOIN votes WHERE votes.default_flag = 1 AND votes.year = YEAR (CURRENT_TIMESTAMP) AND votes.month = MONTH (CURRENT_TIMESTAMP);"
+            cursor.execute(sql)
+    finally:
+        connection.close()
+    return cursor.fetchall()
 
-    # with connection.cursor() as cursor:
-    #     sql = "SELECT `id`, `password` FROM `users` WHERE `email`=%s"
-    #     cursor.execute(sql, ("webmaster@python.org",))
-    #     result = cursor.fetchone()
-    #     print(result)
-finally:
-    connection.close()
+
+def voteMenu(menuID):
+    try:
+        with connection.cursor() as cursor:
+            sql = "INSERT INTO votes (year, month, menu_id, default_flag) VALUES (YEAR (CURRENT_TIMESTAMP), MONTH (CURRENT_TIMESTAMP), %s, FALSE);"
+            cursor.execute(sql, (menuID))
+        connection.commit()
+    finally:
+        connection.close()

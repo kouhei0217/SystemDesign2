@@ -4,6 +4,8 @@ import os
 from flask import Flask, Response, render_template, request, url_for
 from flask_cors import CORS
 
+from python.handleDatabase import fetchMenus, voteMenu
+
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
 CORS(
@@ -54,12 +56,12 @@ def FetchMenu():
 
 @app.route("/fetch-menus", methods=["GET"])
 def FetchMenus():
-    return {"names": ["s1", "s2"]}
+    return fetchMenus()
 
 
 @app.route("/vote-menu", methods=["POST"])
 def VoteMenu():
-    voteNumber = request.data["number"]
+    voteMenu(request.data["id"])
     return Response(status=204)
 
 
