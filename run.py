@@ -69,7 +69,7 @@ def VoteMenuAPI():
 
 @app.route("/add-menu", methods=["POST"])
 def AddMenuAPI():
-    AddMenu(request.data["menu_name"])
+    AddMenu(request.json["menu_name"])
     return Response(status=204)
 
 
