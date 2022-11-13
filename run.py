@@ -1,4 +1,5 @@
 import base64
+import json
 import os
 
 from flask import Flask, Response, render_template, request, url_for
@@ -63,7 +64,7 @@ def FetchMenusAPI():
 
 @app.route("/vote-menu", methods=["POST"])
 def VoteMenuAPI():
-    VoteMenu(request.data["menu_id"])
+    VoteMenu(json.loads(request.data)["menu_id"])
     return Response(status=204)
 
 
