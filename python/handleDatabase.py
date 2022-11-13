@@ -18,9 +18,10 @@ def fetchMenus():
         with connection.cursor() as cursor:
             sql = "SELECT menus.menu_id, menus.menu_name FROM menus NATURAL JOIN votes WHERE votes.default_flag = 1 AND votes.year = YEAR (CURRENT_TIMESTAMP) AND votes.month = MONTH (CURRENT_TIMESTAMP);"
             cursor.execute(sql)
+            result = cursor.fetchall()
     finally:
         connection.close()
-    return cursor.fetchall()
+    return result
 
 
 def voteMenu(menuID):
