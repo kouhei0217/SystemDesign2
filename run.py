@@ -57,7 +57,7 @@ def FetchMenu():
 
 @app.route("/fetch-menus", methods=["GET"])
 def FetchMenus():
-    return json.dump(fetchMenus())
+    return json.dumps(fetchMenus())
 
 
 @app.route("/vote-menu", methods=["POST"])
