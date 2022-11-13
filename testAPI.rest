@@ -1,0 +1,6 @@
+POST http://34.145.94.229/vote-menu HTTP/1.1
+content-type: application/json
+
+{
+    "menu_id": 1,
+}
