@@ -47,7 +47,7 @@ for ($i = 0; $i -lt $database.Length; $i++) {
         if ($primaryKey -ne "") {
             $sql += " PRIMARY KEY (" + $primaryKey + " )"
         }
-        $sql += " )"
+        $sql += " );"
         Write-Output $sql
         exit
     }
