@@ -23,7 +23,7 @@ Sample,1,a定食,,
 ,,,,
 Table,votes,,,
 Field,year,month,menu_id,default_flag
-Type,YEAR,TINY INT,INT UNSIGNED,BOOLEAN
+Type,YEAR,TINYINT,INT UNSIGNED,BOOLEAN
 Null,NO,NO,NO,NO
 Key,,,,
 Default,NULL,NULL,NULL,NULL
