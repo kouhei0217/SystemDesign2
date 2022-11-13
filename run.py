@@ -4,8 +4,8 @@ import os
 from flask import Flask, Response, render_template, request, url_for
 from flask_cors import CORS
 
-from python.HandleDatabase import (AddMenu, FetchImage, FetchMenu, FetchMenus,
-                                   SaveImage, VoteMenu)
+from python.HandleDatabasetemp import (AddMenu, FetchImage, FetchMenu,
+                                       FetchMenus, SaveImage, VoteMenu)
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
