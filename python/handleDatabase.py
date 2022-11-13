@@ -20,7 +20,7 @@ def fetchMenus():
             cursor.execute(sql)
     finally:
         connection.close()
-    return cursor.fetchall()[0]
+    return cursor.fetchall()
 
 
 def voteMenu(menuID):
