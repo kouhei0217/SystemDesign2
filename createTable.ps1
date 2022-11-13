@@ -15,7 +15,7 @@ foreach ($databaseCSVRow in $databaseCSV) {
     $databaseRow = @()
 }
 
-$sql = "CREATE TABLE $Args ("
+$sql = "CREATE TABLE $Args("
 $primaryKey = ""
 for ($i = 0; $i -lt $database.Length; $i++) {
     if ($database[$i][1] -eq $Args[0]) {
@@ -48,7 +48,7 @@ for ($i = 0; $i -lt $database.Length; $i++) {
             }
         }
         if ($primaryKey -ne "") {
-            $sql += "PRIMARY KEY (" + $primaryKey + ") "
+            $sql += "PRIMARY KEY(" + $primaryKey + ")"
         }
         $sql += ");"
         Write-Output $sql
