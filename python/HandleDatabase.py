@@ -41,7 +41,7 @@ def FetchMenu():
     connection = StartConnection()
     try:
         with connection.cursor() as cursor:
-            sql = "SELECT menus.menu_name FROM menus NATURAL JOIN votes WHERE FORMAT(votes.date, 'YYYY-MM') = FORMAT(CURRENT_DATE, 'YYYY-MM') ORDER BY COUNT(menus.menu_id) DESC LIMIT 1;"
+            sql = "SELECT menus.menu_name FROM menus NATURAL JOIN votes WHERE DATE_FORMAT(votes.date, '%Y%m') = DATE_FORMAT(CURRENT_DATE, '%Y%m') ORDER BY COUNT(menus.menu_id) DESC LIMIT 1;"
             cursor.execute(sql)
             result = cursor.fetchall()
     finally:
@@ -53,7 +53,7 @@ def FetchMenus():
     connection = StartConnection()
     try:
         with connection.cursor() as cursor:
-            sql = "SELECT menus.menu_id, menus.menu_name FROM menus NATURAL JOIN votes WHERE votes.default_flag = 1 AND FORMAT(votes.date, 'YYYY-MM') = FORMAT(CURRENT_DATE, 'YYYY-MM');"
+            sql = "SELECT menus.menu_id, menus.menu_name FROM menus NATURAL JOIN votes WHERE votes.default_flag = 1 AND DATE_FORMAT(votes.date, '%Y%m') = DATE_FORMAT(CURRENT_DATE, '%Y%m');"
             cursor.execute(sql)
             result = cursor.fetchall()
     finally:
