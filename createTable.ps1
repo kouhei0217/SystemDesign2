@@ -21,13 +21,16 @@ for ($i = 0; $i -lt $database.Length; $i++) {
     if ($database[$i][1] -eq $Args[0]) {
         for ($j = 1; $j -lt $database[0].Length; $j++) {
             if ($database[$i + 1][$j] -ne "") {
-                $sql += " " + $database[$i + 1][$j] + " " + $database[$i + 2][$j]
+                $sql += $database[$i + 1][$j] + " " + $database[$i + 2][$j]
                 if ($database[$i + 3][$j] -eq "NO") {
                     $sql += " NOT NULL"
                 }
                 if ($database[$i + 4][$j] -ne "") {
                     if ($database[$i + 4][$j] -eq "PRIMARY") {
-                        $primaryKey += " " + $database[$i + 1][$j]
+                        if ($primaryKey -ne "") {
+                            $primaryKey += ", "
+                        }
+                        $primaryKey += $database[$i + 1][$j]
                     }
                     else {
                         $sql += " " + $database[$i + 4][$j]
@@ -40,14 +43,14 @@ for ($i = 0; $i -lt $database.Length; $i++) {
                     $sql += " " + $database[$i + 6][$j]
                 }
                 if (($j -ne $database[0].Length - 1) -or ($primaryKey -ne "")) {
-                    $sql += ","
+                    $sql += ", "
                 }
             }
         }
         if ($primaryKey -ne "") {
-            $sql += " PRIMARY KEY (" + $primaryKey + " )"
+            $sql += "PRIMARY KEY (" + $primaryKey + ") "
         }
-        $sql += " );"
+        $sql += ");"
         Write-Output $sql
         exit
     }
