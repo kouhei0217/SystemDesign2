@@ -45,7 +45,7 @@ def FetchImageAPI():
 @app.route("/save-image", methods=["POST"])
 def SaveImageAPI():
     fs = request.files["image"]
-    imagePath = "./static/menu.jpg"
+    imagePath = "./static/" + (FetchImage()["image_id"] + 1) + ".jpg"
     fs.save(imagePath)
     SaveImage()
     return Response(status=204)
