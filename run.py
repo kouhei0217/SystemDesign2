@@ -64,7 +64,7 @@ def FetchMenusAPI():
 
 @app.route("/vote-menu", methods=["POST"])
 def VoteMenuAPI():
-    VoteMenu(json.loads(request.data)["menu_id"])
+    VoteMenu(json.loads(request.data.decode("utf-8"))["menu_id"])
     return Response(status=204)
 
 
