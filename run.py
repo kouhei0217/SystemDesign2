@@ -41,15 +41,15 @@ def FetchImageAPI():
     print(FetchImage())
     print(FetchImage()[0])
     with open("static/" + str(FetchImage()[0]["image_id"]) + ".jpg", "rb") as file:
-        imageBase64 = base64.b64encode(file.read()).decode("utf-8")
+        imageBase64 = base64.b64encode(file.read())  # 後で消す.decode("utf-8")
     return {"image": imageBase64}
 
 
 @ app.route("/save-image", methods=["POST"])
 def SaveImageAPI():
-    fs = request.files["image"]
-    imagePath = "./static/" + (FetchImage()["image_id"] + 1) + ".jpg"
-    fs.save(imagePath)
+    imagePath = "./static/" + str(FetchImage()["image_id"] + 1) + ".jpg"
+    with open(imagePath, mode="wb") as file:
+        file.write(base64.b64decode(request.json["image"]))
     SaveImage()
     return Response(status=204)
 
