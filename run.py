@@ -37,7 +37,7 @@ def WebAPI():
 
 @app.route("/fetch-image", methods=["GET"])
 def FetchImageAPI():
-    with open("static/" + FetchImage() + ".jpg", "rb") as file:
+    with open("static/" + str(FetchImage()) + ".jpg", "rb") as file:
         imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}
 
