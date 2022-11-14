@@ -47,7 +47,7 @@ def FetchImageAPI():
 
 @ app.route("/save-image", methods=["POST"])
 def SaveImageAPI():
-    imagePath = "./static/" + str(FetchImage()["image_id"] + 1) + ".jpg"
+    imagePath = "./static/" + str(FetchImage()[0]["image_id"] + 1) + ".jpg"
     with open(imagePath, mode="wb") as file:
         file.write(base64.b64decode(request.json["image"]))
     SaveImage()
