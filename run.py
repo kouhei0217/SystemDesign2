@@ -37,12 +37,13 @@ def WebAPI():
 
 @app.route("/fetch-image", methods=["GET"])
 def FetchImageAPI():
+    print(FetchImage()["image_id"])
     with open("static/" + str(FetchImage()["image_id"]) + ".jpg", "rb") as file:
         imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}
 
 
-@app.route("/save-image", methods=["POST"])
+@ app.route("/save-image", methods=["POST"])
 def SaveImageAPI():
     fs = request.files["image"]
     imagePath = "./static/" + (FetchImage()["image_id"] + 1) + ".jpg"
@@ -51,23 +52,23 @@ def SaveImageAPI():
     return Response(status=204)
 
 
-@app.route("/fetch-menu", methods=["GET"])
+@ app.route("/fetch-menu", methods=["GET"])
 def FetchMenuAPI():
     return {"menu_name": FetchMenu()}
 
 
-@app.route("/fetch-menus", methods=["GET"])
+@ app.route("/fetch-menus", methods=["GET"])
 def FetchMenusAPI():
     return {"menus": FetchMenus()}
 
 
-@app.route("/vote-menu", methods=["POST"])
+@ app.route("/vote-menu", methods=["POST"])
 def VoteMenuAPI():
     VoteMenu(request.json["menu_id"])
     return Response(status=204)
 
 
-@app.route("/add-menu", methods=["POST"])
+@ app.route("/add-menu", methods=["POST"])
 def AddMenuAPI():
     AddMenu(request.json["menu_name"])
     return Response(status=204)
