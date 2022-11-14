@@ -19,7 +19,7 @@ def FetchImage():
     connection = StartConnection()
     try:
         with connection.cursor() as cursor:
-            sql = "SELECT MAX(image_id) FROM images;"
+            sql = "SELECT image_id FROM images WHERE image_id = (SELECT MAX(image_id) FROM images);"
             cursor.execute(sql)
             result = cursor.fetchall()
     finally:
