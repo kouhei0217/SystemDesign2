@@ -20,14 +20,14 @@ def override_url_for():
     return dict(url_for=dated_url_for)
 
 
-def dated_url_for(endpoint, **values):
-    if endpoint == "static":
-        filename = values.get("filename", None)
-        if filename:
-            file_path = os.path.join(app.root_path,
-                                     endpoint, filename)
-            values["q"] = int(os.stat(file_path).st_mtime)
-    return url_for(endpoint, **values)
+# def dated_url_for(endpoint, **values):
+#     if endpoint == "static":
+#         filename = values.get("filename", None)
+#         if filename:
+#             file_path = os.path.join(app.root_path,
+#                                      endpoint, filename)
+#             values["q"] = int(os.stat(file_path).st_mtime)
+#     return url_for(endpoint, **values)
 
 
 @app.route("/", methods=["GET"])
@@ -37,9 +37,6 @@ def WebAPI():
 
 @app.route("/fetch-image", methods=["GET"])
 def FetchImageAPI():
-    print(type(FetchImage()))
-    print(FetchImage())
-    print(FetchImage()[0])
     with open("static/" + str(FetchImage()[0]["image_id"]) + ".jpg", "rb") as file:
         imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}

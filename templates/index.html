@@ -3,20 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>学食メニュー</title>
-    <link
-      rel="shortcut icon"
-      href="{{ url_for('static', filename='favicon.ico') }}"
-    />
-    <!-- デプロイ時にコメントアウト解除 <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    /> -->
+    <link rel="shortcut icon" href="../static/favicon.ico" />
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
-    <!-- デプロイ時にコメントアウト解除 <img src="{{ url_for('static', filename='1.jpg') }}" /> -->
-    <img id="image" src="../static/1.jpg" />
-    <!-- デプロイ時にコメントアウト解除 <script src="static/script.js"></script> -->
-    <script src="../static/script.js"></script>
+    <img
+      id="daily_manu"
+      src="../static/image/{{ FetchImage()[0]['image_id'] + '.jpg' }}"
+    />
+    <script src="static/script.js"></script>
+    <script src="static/callAPI.js"></script>
   </body>
 </html>
