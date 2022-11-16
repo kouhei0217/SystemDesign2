@@ -34,10 +34,7 @@ function VoteMenu() {
   for (let i = 0; i < len; i++) {
     if (elements.item(i).checked) {
       fetch("http://34.145.94.229/vote-menu", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         method: "POST",
         body: JSON.stringify({ menu_id: elements.item(i).value }),
       });
@@ -49,10 +46,7 @@ function VoteMenu() {
 // 投票用のメニューを追加
 function AddMenu() {
   fetch("http://34.145.94.229/add-menu", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     method: "POST",
     body: JSON.stringify({
       menu_name: document.getElementsById("menu_adder").value,
