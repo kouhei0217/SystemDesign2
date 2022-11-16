@@ -1,6 +1,8 @@
+let APIaddress = "34.105.1.151";
+
 // 先月のNo.1メニューの名前を取得
 function FetchMenu() {
-  fetch("http://34.145.89.163/fetch-menu")
+  fetch("http://" + APIaddress + "/fetch-menu")
     .then(function (response) {
       return response.json();
     })
@@ -11,7 +13,7 @@ function FetchMenu() {
 
 // 過去のメニューの名前を取得
 function FetchMenus() {
-  fetch("http://34.145.89.163/fetch-menus")
+  fetch("http://" + APIaddress + "/fetch-menus")
     .then(function (response) {
       return response.json();
     })
@@ -33,7 +35,7 @@ function VoteMenu() {
   elements = document.getElementsByName("names");
   for (let i = 0; i < len; i++) {
     if (elements.item(i).checked) {
-      fetch("http://34.145.94.229/vote-menu", {
+      fetch("http://" + APIaddress + "/vote-menu", {
         headers: { "Content-Type": "application/json" },
         method: "POST",
         body: JSON.stringify({ menu_id: elements.item(i).value }),
@@ -45,7 +47,7 @@ function VoteMenu() {
 
 // 投票用のメニューを追加
 function AddMenu() {
-  fetch("http://34.145.94.229/add-menu", {
+  fetch("http://" + APIaddress + "/add-menu", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
     body: JSON.stringify({
