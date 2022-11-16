@@ -1,7 +1,6 @@
 import base64
-import os
 
-from flask import Flask, Response, render_template, request, url_for
+from flask import Flask, Response, render_template, request
 from flask_cors import CORS
 
 from python.HandleDatabase import (AddMenu, FetchImage, FetchMenu, FetchMenus,
@@ -17,7 +16,7 @@ CORS(
 
 @app.route("/", methods=["GET"])
 def WebAPI():
-    return render_template("index.html")
+    return render_template("index.html", image_id=FetchImage()[0]["image_id"])
 
 
 @app.route("/fetch-image", methods=["GET"])
