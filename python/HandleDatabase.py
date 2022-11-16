@@ -33,6 +33,7 @@ def SaveImage():
         with connection.cursor() as cursor:
             sql = "INSERT INTO images(date) VALUES(CURRENT_DATE);"
             cursor.execute(sql)
+        connection.commit()
     finally:
         connection.close()
 
