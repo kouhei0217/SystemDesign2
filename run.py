@@ -41,7 +41,7 @@ def FetchImageAPI():
     print(FetchImage())
     print(FetchImage()[0])
     with open("static/" + str(FetchImage()[0]["image_id"]) + ".jpg", "rb") as file:
-        imageBase64 = base64.b64encode(file.read())  # 後で消す.decode("utf-8")
+        imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}
 
 
