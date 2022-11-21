@@ -1,5 +1,6 @@
 import base64
 import datetime
+import json
 
 import pytz
 from dateutil.relativedelta import relativedelta
@@ -62,8 +63,8 @@ def CallVoteMenu():
     maxAge = pytz.timezone("Asia/Tokyo").localize(datetime.datetime.combine(datetime.date.today().replace(
         day=1) + relativedelta(months=1), datetime.time())).timestamp() - datetime.datetime.now().timestamp()
     expires = int(datetime.datetime.now().timestamp()) + maxAge
-    # value = {"hasVoted": True, "menu_id": request.json["menu_id"]}
-    response.set_cookie("hasVoted", value="value",
+    value = {"hasVoted": True, "menu_id": request.json["menu_id"]}
+    response.set_cookie("hasVoted", value=json.dumps(value),
                         max_age=maxAge, expires=expires)
     return response
 
