@@ -1,6 +1,9 @@
 import base64
+import datetime
 
-from flask import Flask, Response, render_template, request
+import pytz
+from dateutil.relativedelta import relativedelta
+from flask import Flask, Response, make_response, render_template, request
 from flask_cors import CORS
 
 from python.HandleDatabase import (AddMenu, FetchImage, FetchMenu, FetchMenus,
@@ -31,7 +34,7 @@ def CallFetchImage():
     return {"image": imageBase64}
 
 
-@ app.route("/save-image", methods=["POST"])
+@app.route("/save-image", methods=["POST"])
 def CallSaveImage():
     imagePath = "./static/images/" + \
         str(FetchImage()[0]["image_id"] + 1) + ".jpg"
@@ -41,23 +44,31 @@ def CallSaveImage():
     return Response(status=204)
 
 
-@ app.route("/fetch-menu", methods=["GET"])
+@app.route("/fetch-menu", methods=["GET"])
 def CallFetchMenu():
     return {"menu_name": FetchMenu()}
 
 
-@ app.route("/fetch-menus", methods=["GET"])
+@app.route("/fetch-menus", methods=["GET"])
 def CallFetchMenus():
     return {"menus": FetchMenus()}
 
 
-@ app.route("/vote-menu", methods=["POST"])
+@app.route("/vote-menu", methods=["POST"])
 def CallVoteMenu():
-    VoteMenu(request.json["menu_id"])
-    return Response(status=204)
+    # VoteMenu(request.json["menu_id"])
+
+    response = make_response(Response(status=204))
+    maxAge = pytz.timezone("Asia/Tokyo").localize(datetime.datetime.combine(datetime.date.today().replace(
+        day=1) + relativedelta(months=1), datetime.time())).timestamp() - datetime.datetime.now().timestamp()
+    expires = int(datetime.datetime.now().timestamp()) + maxAge
+    value = {"hasVoted": True, "menu_id": request.json["menu_id"]}
+    response.set_cookie("hasVoted", value=value,
+                        max_age=maxAge, expires=expires)
+    return response
 
 
-@ app.route("/add-menu", methods=["POST"])
+@app.route("/add-menu", methods=["POST"])
 def CallAddMenu():
     AddMenu(request.json["menu_name"])
     return Response(status=204)
