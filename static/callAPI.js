@@ -33,7 +33,7 @@ function FetchMenus() {
 // リクエストしたいメニューを投票
 function VoteMenu() {
   elements = document.getElementsByName("names");
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < elements.length; i++) {
     if (elements.item(i).checked) {
       fetch("http://" + APIaddress + "/vote-menu", {
         headers: { "Content-Type": "application/json" },
@@ -43,6 +43,11 @@ function VoteMenu() {
       break;
     }
   }
+  fetch("http://" + APIaddress + "/vote-menu", {
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
+    body: JSON.stringify({ menu_id: 1 }),
+  });
 }
 
 // 投票用のメニューを追加
