@@ -59,12 +59,12 @@ def CallVoteMenu():
     # VoteMenu(request.json["menu_id"])
 
     response = make_response(Response(status=204))
-    # maxAge = pytz.timezone("Asia/Tokyo").localize(datetime.datetime.combine(datetime.date.today().replace(
-    #     day=1) + relativedelta(months=1), datetime.time())).timestamp() - datetime.datetime.now().timestamp()
-    # expires = int(datetime.datetime.now().timestamp()) + maxAge
+    maxAge = pytz.timezone("Asia/Tokyo").localize(datetime.datetime.combine(datetime.date.today().replace(
+        day=1) + relativedelta(months=1), datetime.time())).timestamp() - datetime.datetime.now().timestamp()
+    expires = int(datetime.datetime.now().timestamp()) + maxAge
     # value = {"hasVoted": True, "menu_id": request.json["menu_id"]}
-    # response.set_cookie("hasVoted", value=value,
-    #                     max_age=maxAge, expires=expires)
+    response.set_cookie("hasVoted", value="value",
+                        max_age=maxAge, expires=expires)
     return response
 
 
