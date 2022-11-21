@@ -15,19 +15,24 @@ CORS(
 
 
 @app.route("/", methods=["GET"])
-def WebAPI():
+def IndexHTML():
     return render_template("index.html", image_id=FetchImage()[0]["image_id"])
 
 
+@app.route("/admin", methods=["GET"])
+def AdminHTML():
+    return render_template("admin.html")
+
+
 @app.route("/fetch-image", methods=["GET"])
-def FetchImageAPI():
+def CallFetchImage():
     with open("static/images/" + str(FetchImage()[0]["image_id"]) + ".jpg", "rb") as file:
         imageBase64 = base64.b64encode(file.read()).decode("utf-8")
     return {"image": imageBase64}
 
 
 @ app.route("/save-image", methods=["POST"])
-def SaveImageAPI():
+def CallSaveImage():
     imagePath = "./static/images/" + \
         str(FetchImage()[0]["image_id"] + 1) + ".jpg"
     with open(imagePath, mode="wb") as file:
@@ -37,23 +42,23 @@ def SaveImageAPI():
 
 
 @ app.route("/fetch-menu", methods=["GET"])
-def FetchMenuAPI():
+def CallFetchMenu():
     return {"menu_name": FetchMenu()}
 
 
 @ app.route("/fetch-menus", methods=["GET"])
-def FetchMenusAPI():
+def CallFetchMenus():
     return {"menus": FetchMenus()}
 
 
 @ app.route("/vote-menu", methods=["POST"])
-def VoteMenuAPI():
+def CallVoteMenu():
     VoteMenu(request.json["menu_id"])
     return Response(status=204)
 
 
 @ app.route("/add-menu", methods=["POST"])
-def AddMenuAPI():
+def CallAddMenu():
     AddMenu(request.json["menu_name"])
     return Response(status=204)
 
