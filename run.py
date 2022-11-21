@@ -66,7 +66,10 @@ def CallVoteMenu():
     value = {"hasVoted": True, "menu_id": request.json["menu_id"]}
     response.set_cookie("hasVoted", value="test")
     cookie = request.cookies.get("hasVoted")
-    print(json.loads(cookie))
+    try:
+        print(json.loads(cookie))
+    except:
+        pass
     # response.set_cookie("hasVoted", value=json.dumps(value),
     #                     max_age=maxAge, expires=expires)
     return response
