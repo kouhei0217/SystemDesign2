@@ -45,7 +45,6 @@ function VoteMenu() {
   }
   fetch("http://" + APIaddress + "/vote-menu", {
     method: "POST",
-    credentials: "same-origin",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ menu_id: 1 }),
   });
