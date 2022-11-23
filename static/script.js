@@ -1,3 +1,4 @@
+FetchMenu();
 FetchMenus();
 
 function CheckCookie() {
