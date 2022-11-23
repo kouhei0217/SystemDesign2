@@ -37,7 +37,7 @@ function FetchMenus() {
 
 // リクエストしたいメニューを投票
 function VoteMenu() {
-  elements = document.getElementsByName("names");
+  elements = document.getElementsByName("menus");
   for (let i = 0; i < elements.length; i++) {
     if (elements.item(i).checked) {
       fetch("http://" + APIaddress + "/vote-menu", {
