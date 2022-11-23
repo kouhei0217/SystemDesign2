@@ -65,7 +65,7 @@ def CallVoteMenu():
     expires = int(datetime.datetime.now().timestamp()) + maxAge
     value = {"hasVoted": True, "menu_id": request.json["menu_id"]}
     response.set_cookie("hasVoted", value=json.dumps(
-        value), max_age=maxAge, expires=expires)
+        value), max_age=maxAge, expires=expires, httponly=True, domain="127.0.0.1")
     cookie = request.cookies.get("hasVoted")
     print(cookie)
     return response
