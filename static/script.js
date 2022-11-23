@@ -1,7 +1,6 @@
 FetchMenus();
-checkCookie();
 
-function checkCookie() {
+function CheckCookie() {
   if (document.cookie != "") {
     elements = document.getElementsByName("menus");
     console.log(elements);
@@ -10,6 +9,6 @@ function checkCookie() {
       console.log(elements.item(i));
     }
     document.getElementById("vote_menu").disabled = true;
-    document.getElementById(document.cookie[1]).checked = true;
+    document.getElementById(document.cookie.split("=")[1]).checked = true;
   }
 }

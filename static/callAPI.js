@@ -32,6 +32,7 @@ function FetchMenus() {
           "</label></div>";
       }
       document.getElementById("request_menus").innerHTML = menusHTML;
+      CheckCookie();
     });
 }
 
