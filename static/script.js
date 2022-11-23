@@ -6,7 +6,7 @@ function checkCookie() {
     console.log("a");
     document.getElementsByName("menus").disable = true;
     document.getElementById("vote_menu").disable = true;
-    cookie = document.cookies.split("=");
+    cookie = document.cookie.split("=");
     if (cookie[0] == "menu_id") {
       document.getElementById(cookie[1]).checked = true;
     }
