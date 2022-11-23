@@ -7,7 +7,7 @@ function FetchMenu() {
       return response.json();
     })
     .then(function (data) {
-      popular_menu.innerHTML = data.menu_name;
+      document.getElementById("popular_menu").innerHTML = data.menu_name;
     });
 }
 
@@ -21,12 +21,17 @@ function FetchMenus() {
       let menusHTML = "";
       for (let i = 0; i < data.menus.length; i++) {
         menusHTML +=
-          "<input type='radio' name='menus' value=" +
+          "<div class='radio_button'><input type='radio' name='menus' id=" +
+          (i + 1) +
+          " value=" +
           data.menus[i].menu_id +
+          "><label for=" +
+          (i + 1) +
           ">" +
-          data.menus[i].menu_name;
+          data.menus[i].menu_name +
+          "</label></div>";
       }
-      menusHTML.innerHTML = menusHTML;
+      document.getElementById("request_menus").innerHTML = menusHTML;
     });
 }
 
@@ -56,7 +61,7 @@ function AddMenu() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      menu_name: document.getElementsById("menu_adder").value,
+      menu_name: document.getElementsById("send_button").value,
     }),
   });
 }
