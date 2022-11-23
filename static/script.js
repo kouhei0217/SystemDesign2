@@ -10,7 +10,8 @@ function checkCookie() {
     }
     document.getElementById("vote_menu").disabled = true;
     cookie = document.cookie.split("=");
-    console.log(cookie[0]);
+    console.log(document.cookie);
+    console.log(cookie);
     if (cookie[0] == "menu_id") {
       console.log("a");
       document.getElementById(cookie[1]).checked = true;
