@@ -45,11 +45,12 @@ function VoteMenu() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ menu_id: elements.item(i).value }),
+      }).then(function () {
+        CheckCookie();
       });
       break;
     }
   }
-  checkCookie();
 }
 
 // 投票用のメニューを追加
