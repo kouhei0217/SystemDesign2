@@ -1,5 +1,4 @@
 FetchMenus();
-checkCookie();
 
 function checkCookie() {
   if (document.cookie != "") {
@@ -14,3 +13,5 @@ function checkCookie() {
     }
   }
 }
+
+checkCookie();
