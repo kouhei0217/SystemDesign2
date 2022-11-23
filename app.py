@@ -67,8 +67,8 @@ def CallVoteMenu():
     response.set_cookie("hasVoted", value="test")
     cookie = request.cookies.get("hasVoted")
     print(cookie)
-    # response.set_cookie("hasVoted", value=json.dumps(value),
-    #                     max_age=maxAge, expires=expires)
+    response.set_cookie("hasVoted", value=json.dumps(
+        value), max_age=maxAge, expires=expires)
     return response
 
 
