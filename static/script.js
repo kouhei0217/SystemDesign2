@@ -1,8 +1,8 @@
-window.addEventListener("DOMContentLoaded", function () {
-  setInterval(() => {
-    // window.location.reload();
-  }, 10000);
-});
+// window.addEventListener("DOMContentLoaded", function () {
+//   setInterval(() => {
+//     // window.location.reload();
+//   }, 10000);
+// });
 
 FetchMenus();
 
