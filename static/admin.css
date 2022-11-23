@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h1 {
+    margin: 20vh auto 15vh auto;
+    font-size: 7vh;
+    text-align: center;
+}
+
+h2 {
+    margin: 3vh;
+    font-size: 4vh;
+    text-align: center;
+}
+
+.send_menu_box {
+    display: flex;
+    width: 100vh;
+    margin: auto;
+    justify-content: space-around;
+}
+
+#menu_text {
+    text-align: center;
+}
+
+#send_button {
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+#send_button:hover {
+    width: 42vh;
+    background-color: #ccc;
+}
+
+#send_button:active {
+    transform: translateY(10px);
+}
+
+#menu_text,
+#send_button {
+    display: block;
+    font-size: 3vh;
+    width: 40vh;
+    height: 6vh;
+    background: none;
+}
