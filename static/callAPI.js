@@ -9,7 +9,7 @@ function FetchMenu() {
     .then(function (data) {
       document.getElementById("popular_menu").innerHTML =
         "<div>" +
-        setDate(date.getMonth() - 12) +
+        date.setDate(date.getMonth() - 11) +
         "月のNo.1メニュー</div><div>" +
         data.menu_name[0].menu_name +
         "</div>";
