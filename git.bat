@@ -1,1 +1,1 @@
-powershell -File git.ps1
+@echo off
