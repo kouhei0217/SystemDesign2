@@ -8,7 +8,11 @@ function FetchMenu() {
     })
     .then(function (data) {
       document.getElementById("popular_menu").innerHTML =
-        data.menu_name[0].menu_name;
+        "<div>" +
+        (date.getMonth() + 1) +
+        "月のNo.1メニュー</div><div>" +
+        data.menu_name[0].menu_name +
+        "</div>";
     });
 }
 
