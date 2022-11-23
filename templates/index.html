@@ -1,15 +1,67 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
     <title>学食メニュー</title>
-    <link rel="shortcut icon" href="../static/favicon.ico" />
-    <link rel="stylesheet" href="../static/style.css" />
-  </head>
-  <body>
-    <img id="daily_manu" src="../static/images/{{ image_id }}.jpg" />
-    <button onclick="VoteMenu()">vote</button>
-    <script src="../static/script.js"></script>
-    <script src="../static/callAPI.js"></script>
-  </body>
+</head>
+<body>
+
+    <div class="main">
+        <div class="menu_box">
+            <h2 class="title">今日の学食メニュー</h2>
+
+            <div class="menus">
+                <div class="menu">
+                    <h1 class="title">
+                        日替わり定食：<span></span>
+                    </h1>
+                    <img src="">
+                </div>
+
+                <div class="menu">
+                    <h1 class="title">
+                        かつ丼：<span></span>
+                    </h1>
+                    <img src="">
+                </div>
+
+                <div class="menu">
+                    <h1 class="title">
+                        親子丼：<span></span>
+                    </h1>
+                    <img src="">
+                </div>
+            </div>
+        </div>
+
+        <div class="request_box">
+            <div class="title">
+                <span>(n-1)</span>月のNo.1メニュー
+                <div>〇〇料理</div>
+            </div>
+
+            <h1>メニューリクエスト</h1>
+
+            <div class="menus">
+                <div class="radio_button">
+                    <input type="radio" name="menus" id="1"> <label for="1">料理1</label>
+                </div>
+                <div class="radio_button">
+                    <input type="radio" name="menus" id="2"> <label for="2">料理2</label>
+                </div>
+                <div class="radio_button">
+                    <input type="radio" name="menus" id="3"> <label for="3">料理3</label>
+                </div>
+            </div>
+
+            <button>
+                選択した料理に投票
+            </button>
+        </div>
+    </div>
+</body>
 </html>

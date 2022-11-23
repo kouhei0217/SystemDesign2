@@ -1,0 +1,91 @@
+$request_box_color: #fff5d9;
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    overflow: hidden;
+
+    .main {
+        display: flex;
+    
+        .menu_box {
+            flex: 1;
+            height: 100vh;
+            overflow-y: scroll;
+            scrollbar-width: thin;
+    
+            .title {
+                margin: 0 auto;
+                text-align: center;
+            }
+    
+            .menus {
+                margin-top: 30px;
+    
+                .menu {
+                    margin: 20px auto;
+    
+                    img {
+                        border: 1px solid #ffab40;
+                    }
+                }
+            }
+        }
+    
+        .request_box {
+            background-color: #fff5d9;
+            flex: 1;
+            height: 100vh;
+    
+            .title {
+                margin: 3vh auto;
+                border: 1px solid #000;
+                width: 80%;
+                font-weight: bold;
+                text-align: center;
+                font-size: 4vh;
+            }
+    
+            h1 {
+                width: 80%;
+                margin: auto;
+                text-align: center;
+                font-size: 5vh;
+            }
+    
+            .menus {
+                width: 90%;
+                height: 50vh;
+                margin: 10px auto;
+                border: 1px solid #000;
+                overflow-y: scroll;
+    
+                .radio_button {
+                    margin: 2.5vh;
+                    padding: 5px;
+                    font-size: 3vh;
+    
+                    label {
+                        font-weight: bold;
+                        margin-left: 2vh;
+                    }
+                }
+            }
+    
+            button {
+                display: block;
+                margin: 5vh auto;
+                padding: 2px 10px;
+                font-weight: bold;
+                font-size: 5vh;
+                background-color: $request_box_color;
+                border-radius: 0px;
+            }
+        }
+    
+    }
+}
