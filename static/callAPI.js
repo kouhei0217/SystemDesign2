@@ -36,16 +36,17 @@ function VoteMenu() {
   for (let i = 0; i < elements.length; i++) {
     if (elements.item(i).checked) {
       fetch("http://" + APIaddress + "/vote-menu", {
-        headers: { "Content-Type": "application/json" },
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ menu_id: elements.item(i).value }),
       });
       break;
     }
   }
   fetch("http://" + APIaddress + "/vote-menu", {
-    headers: { "Content-Type": "application/json" },
     method: "POST",
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ menu_id: 1 }),
   });
 }
@@ -53,8 +54,8 @@ function VoteMenu() {
 // 投票用のメニューを追加
 function AddMenu() {
   fetch("http://" + APIaddress + "/add-menu", {
-    headers: { "Content-Type": "application/json" },
     method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       menu_name: document.getElementsById("menu_adder").value,
     }),
