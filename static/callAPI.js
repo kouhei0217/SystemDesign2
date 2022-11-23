@@ -61,7 +61,7 @@ function AddMenu() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      menu_name: document.getElementsById("menu_text").value,
+      menu_name: document.getElementById("menu_text").value,
     }),
   });
 }
