@@ -8,7 +8,7 @@ function FetchMenu() {
     })
     .then(function (data) {
       document.getElementById("popular_menu").innerHTML =
-        data.menu_name.menu_name;
+        data.menu_name[0].menu_name;
     });
 }
 
