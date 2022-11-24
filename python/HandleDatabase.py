@@ -9,7 +9,7 @@ load_dotenv()
 def StartConnection():
     return pymysql.connect(host="localhost",
                            user="orikami",
-                           password=os.getenv("password"),
+                           password=os.getenv("PASSWORD"),
                            db="SystemDesign2",
                            charset="utf8mb4",
                            cursorclass=pymysql.cursors.DictCursor)
