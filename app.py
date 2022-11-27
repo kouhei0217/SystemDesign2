@@ -1,6 +1,5 @@
 import base64
 import datetime
-import json
 
 import pytz
 from dateutil.relativedelta import relativedelta
