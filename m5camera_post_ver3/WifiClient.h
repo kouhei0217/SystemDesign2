@@ -5,4 +5,5 @@ class WifiClient {
   public:
     void begin(const char *ssid, const char *password);
     void post(const char *host, const char *buffer, const size_t length);
+    void post2(const char *host, const char *buffer, const size_t length);
 };
