@@ -8,12 +8,15 @@
 // 環境に合わせて適宜変更します
 //const char* ssid = "aterm-b27d1e";
 //const char* password = "236fd38a4e01c";
+
 //自宅
 const char* ssid = "IODATA-bd7f38-2G";//多分5Gだめ
 const char* password = "1234567890";
+//
 
 //const char* upload_endpoint = "http://34.145.94.229/save-image";//アップロード先
-const char* upload_endpoint = "http://34.105.1.151/save-image";//アップロード先
+const char* upload_endpoint = "http://192.168.1.45/m5camera/upload.php";//アップロード先
+const char* upload_endpoint2 = "http://34.105.1.151/save-image";//アップロード先
 uint64_t starttime;
 Camera *camera;
 WifiClient *wifi;
@@ -50,11 +53,14 @@ void loop() {
   // put your main code here, to run repeatedly:
   const char *fb_buf;
   size_t fb_len;
-
-  camera->capture(&fb_buf, &fb_len);
-  wifi->post(upload_endpoint, fb_buf, fb_len);
+//  camera->capture(&fb_buf, &fb_len);
+//  wifi->post(upload_endpoint, fb_buf, fb_len);
+  
+  camera->capture2(&fb_buf, &fb_len);
+  wifi->post2(upload_endpoint2, fb_buf, fb_len);
   camera->free();
-
+  
+  delay(50000);
   deep_sleep(SLEEP_INTERVAL_SEC);
   // deep sleepするとこの先は処理されません。loop()も一度だけです
 }
