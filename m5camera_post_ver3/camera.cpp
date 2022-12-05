@@ -1,8 +1,10 @@
-#include <M5Stack.h>
-
 #include "Camera.h"
 #include "camera_pins.h"
+#include "M5Stack.h"
 
+extern "C" {
+#include "crypto/base64.h"
+}
 Camera::Camera()
 {
   fb = NULL;
@@ -58,9 +60,9 @@ Camera::begin()
   sensor_t * s = esp_camera_sensor_get();
   //initial sensors are flipped vertically and colors are a bit saturated
   if (s->id.PID == OV3660_PID) {
-    s->set_vflip(s, 1);//flip it back
-    s->set_brightness(s, 1);//up the blightness just a bit
-    s->set_saturation(s, -2);//lower the saturation
+    s->set_vflip(s, 1);//反転
+    s->set_brightness(s, 1);//明るく
+    s->set_saturation(s, -2);//飽和を下げる
   }
 
   // 好きなようにカメラの設定を変更します
@@ -70,7 +72,6 @@ Camera::begin()
   Serial.println("Camera init Successful");
   delay(1500);  // waiting for Camera Sensor stabilize
 }
-
 // 引数に指定されたバッファポインタをJPEG画像の領域に当てるようにします
 esp_err_t
 Camera::capture(const char **fb_buf, size_t *fb_len)
@@ -91,6 +92,29 @@ Camera::capture(const char **fb_buf, size_t *fb_len)
   return res;
 }
 
+esp_err_t
+Camera::capture2(const char **fb_buf, size_t *fb_len)
+{
+  unsigned char * encoded;
+  esp_err_t res = ESP_OK;
+
+  fb = esp_camera_fb_get();//画像取得
+  if (!fb) {
+    Serial.println("Camera capture failed");
+    return ESP_FAIL;
+  }//取れなかった場合
+  if (fb->format == PIXFORMAT_JPEG) {
+    *fb_len = fb->len;
+    *fb_buf = (const char *)fb->buf;
+    Serial.println("JPEG captured");
+    encoded = base64_encode((const unsigned char*)fb_buf, strlen(*fb_buf), fb_len);
+    *fb_buf = (const char *)encoded;
+    Serial.println("base64 captured");
+    Serial.print("Length of encoded message: ");
+    Serial.println(*fb_buf);
+  }
+  return res;
+}
 void
 Camera::free()
 {
