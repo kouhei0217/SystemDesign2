@@ -41,6 +41,7 @@ def CallSaveImage():
     with open(imagePath, mode="wb") as file:
         file.write(base64.b64decode(request.json["image"]))
     SaveImage()
+    print(request.get_data())
     return Response(status=204)
 
 
