@@ -36,11 +36,12 @@ def CallFetchImage():
 
 @app.route("/save-image", methods=["POST"])
 def CallSaveImage():
-    imagePath = "static/images/" + \
-        str(FetchImage()[0]["image_id"] + 1) + ".jpg"
-    with open(imagePath, mode="wb") as file:
-        file.write(base64.b64decode(request.json["image"]))
-    SaveImage()
+    # imagePath = "static/images/" + \
+    #     str(FetchImage()[0]["image_id"] + 1) + ".jpg"
+    # with open(imagePath, mode="wb") as file:
+    #     file.write(base64.b64decode(request.json["image"]))
+    # SaveImage()
+    print(request.get_data())
     return Response(status=204)
 
 
