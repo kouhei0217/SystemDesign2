@@ -77,7 +77,7 @@ def AddMenu(menuName):
     connection = StartConnection()
     try:
         with connection.cursor() as cursor:
-            sql = "INSERT IGNORE INTO menus(menu_name) VALUES(%s);"
+            sql = "INSERT INTO menus(menu_name) VALUES(%s);"
             cursor.execute(sql, (menuName))
             sql = "INSERT INTO votes(menu_id, default_flag) SELECT menu_id, TRUE FROM menus WHERE menu_name = %s;"
             cursor.execute(sql, (menuName))

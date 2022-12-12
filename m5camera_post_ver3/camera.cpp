@@ -1,10 +1,13 @@
 #include "Camera.h"
 #include "camera_pins.h"
 #include "M5Stack.h"
-
 extern "C" {
 #include "crypto/base64.h"
 }
+char size[50];
+char img[100] = "test";
+size_t output_length;
+
 Camera::Camera()
 {
   fb = NULL;
@@ -13,6 +16,7 @@ Camera::Camera()
 void
 Camera::begin()
 {
+  //設定
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
   config.ledc_timer = LEDC_TIMER_0;
@@ -66,7 +70,7 @@ Camera::begin()
   }
 
   // 好きなようにカメラの設定を変更します
-  s->set_framesize(s, FRAMESIZE_SVGA);  // 大きさを800x600にします
+  s->set_framesize(s, FRAMESIZE_SVGA);  // 大きさを800x600に
   s->set_ae_level(s, 1);  // 少し明るくします
 
   Serial.println("Camera init Successful");
@@ -77,41 +81,21 @@ esp_err_t
 Camera::capture(const char **fb_buf, size_t *fb_len)
 {
   esp_err_t res = ESP_OK;
-
-  fb = esp_camera_fb_get();
-  if (!fb) {
-    Serial.println("Camera capture failed");
-    return ESP_FAIL;
-  }
-
-  if (fb->format == PIXFORMAT_JPEG) {
-    *fb_len = fb->len;
-    *fb_buf = (const char *)fb->buf;
-    Serial.println("JPEG captured");
-  }
-  return res;
-}
-
-esp_err_t
-Camera::capture2(const char **fb_buf, size_t *fb_len)
-{
-  unsigned char * encoded;
-  esp_err_t res = ESP_OK;
-
   fb = esp_camera_fb_get();//画像取得
-  if (!fb) {
+  if (!fb) {//取れなかった場合
     Serial.println("Camera capture failed");
     return ESP_FAIL;
-  }//取れなかった場合
+  }
   if (fb->format == PIXFORMAT_JPEG) {
-    *fb_len = fb->len;
-    *fb_buf = (const char *)fb->buf;
+    *fb_len = fb->len;//画像データの長さ
     Serial.println("JPEG captured");
-    encoded = base64_encode((const unsigned char*)fb_buf, strlen(*fb_buf), fb_len);
-    *fb_buf = (const char *)encoded;
+    unsigned char * encoded = base64_encode((const unsigned char*)fb->buf, *fb_len, &output_length);//base64変換
+    *fb_buf = (const char *)encoded;//キャストしてバッファーに代入
+    *fb_len = output_length;
     Serial.println("base64 captured");
-    Serial.print("Length of encoded message: ");
-    Serial.println(*fb_buf);
+    Serial.println("Length of encoded message: ");
+    //Serial.println(*fb_buf);
+    printf("%.*s", output_length, encoded);
   }
   return res;
 }
@@ -123,3 +107,6 @@ Camera::free()
     fb = NULL;
   }
 }
+//参考URL
+//https://www.esp32.com/viewtopic.php?t=10883
+//https://qiita.com/suzutsuki0220/items/2e5fdfacc84e91869ac0
