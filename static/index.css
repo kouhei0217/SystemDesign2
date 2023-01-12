@@ -84,17 +84,12 @@ body .main .request_box .menus .radio_button label {
 }
 
 body .main .request_box .button {
-  color: #fff;
   display: block;
-  background: #333;
   margin: 5vh auto;
   padding: 2px 10px;
   font-weight: bold;
   font-size: 5vh;
+  
   border-radius: 0px;
-  transition: .3s;
-}
-body .main .request_box .button: hover {
-  backgruond: #13c3ac;
 }
 /*# sourceMappingURL=index.css.map */
