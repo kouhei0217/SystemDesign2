@@ -84,6 +84,7 @@ body .main .request_box .menus .radio_button label {
 }
 
 body .main .request_box button {
+  color: #fff;
   display: block;
   margin: 5vh auto;
   padding: 2px 10px;
@@ -91,5 +92,9 @@ body .main .request_box button {
   font-size: 5vh;
   background-color: #fff5d9;
   border-radius: 0px;
+  transition: .3s;
+}
+body .main .request_box button:hover {
+  background: #13c3ac;
 }
 /*# sourceMappingURL=index.css.map */
