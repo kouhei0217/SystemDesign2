@@ -94,7 +94,7 @@ body .main .request_box button {
   border-radius: 0px;
   transition: .3s;
 }
-body .main .request_box .button:hover {
+body .main .request_box button:hover {
   background: #808080;
 }
 /*# sourceMappingURL=index.css.map */
