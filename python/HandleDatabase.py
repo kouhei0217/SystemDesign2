@@ -42,7 +42,7 @@ def FetchMenu():
     connection = StartConnection()
     try:
         with connection.cursor() as cursor:
-            sql = "SELECT menus.menu_name FROM menus NATURAL JOIN votes WHERE DATE_FORMAT(votes.date, '%Y%m') = DATE_FORMAT(CURRENT_DATE, '%Y%m') ORDER BY COUNT(menus.menu_id) DESC LIMIT 1;"
+            sql = "SELECT menus.menu_name FROM menus NATURAL JOIN votes WHERE DATE_FORMAT(votes.date, '%Y%m') = DATE_FORMAT(DATE_ADD(CURRENT_DATE, INTERVAL -1 MONTH), '%Y%m') ORDER BY COUNT(menus.menu_id) DESC LIMIT 1;"
             cursor.execute(sql)
             result = cursor.fetchall()
     finally:
