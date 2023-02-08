@@ -39,6 +39,7 @@ function FetchMenus() {
       }
       document.getElementById("request_menus").innerHTML = menusHTML;
       CheckCookie();
+      console.log(date.getMonth());
     });
 }
 
@@ -53,6 +54,7 @@ function VoteMenu() {
         body: JSON.stringify({ menu_id: elements.item(i).value }),
       }).then(function () {
         CheckCookie();
+        console.log(date.getMonth());
       });
       break;
     }
